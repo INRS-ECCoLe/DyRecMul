@@ -111,7 +111,7 @@ begin
         RECONF_MULT_S: reconfig_mult -- second multiplier in ping pong mechanism
               port map( CDI_i   => CDI_i,
                         wr_conf => wr_conf_s,
-                        data_i  => shifted_x,
+                        data_i  => mantissa,
                         clk     => clk,
                         data_o  => mult_result_s
                );
