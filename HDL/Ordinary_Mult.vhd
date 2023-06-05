@@ -34,10 +34,10 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity ord_mult is
-    generic(LENGTH : integer:= 8);
+    generic(LENGTH : integer:= 7);
     Port ( a : in STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Mult input 1
            b : in STD_LOGIC_VECTOR (LENGTH-1 downto 0);    -- Mult input 2
-           a_i: in STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Add input
+           add_i: in STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Add input
            clk, rst : in STD_LOGIC;
            
            result_o : out STD_LOGIC_VECTOR (LENGTH-1 downto 0)
@@ -46,8 +46,11 @@ end ord_mult;
 
 architecture Behavioral of ord_mult is
     signal temp :  STD_LOGIC_VECTOR (2*LENGTH-1 downto 0);
+    signal a_buf : STD_LOGIC_VECTOR (LENGTH-1 downto 0);
+    signal b_buf : STD_LOGIC_VECTOR (LENGTH-1 downto 0);
+    signal add_buf: STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Add input
 begin
-    temp <= a * b;
+    temp <= a_buf * b_buf;
     
     process(clk)
     begin
@@ -55,7 +58,10 @@ begin
             if rst = '1' then
                 result_o <= (others => '0');
             else
-                result_o <= a_i + temp(2*LENGTH-1 downto LENGTH);
+                a_buf <= a;
+                b_buf <= b;
+                add_buf <= add_i;
+                result_o <= add_buf + temp(2*LENGTH-1 downto LENGTH);
              end if;
         end if;
     end process;

@@ -54,8 +54,8 @@ architecture Behavioral of MAC_Testbench is
     signal test_counter     : integer;
     signal bit_cnt          : integer;
     type test_coef_vec_type is array (1 to TEST_LENGTH) of integer;
-    constant test_coef_vec  : test_coef_vec_type := (61, 101, 180, 221); -- To store in reconfig LUTs
-    constant test_mult_vec  : test_coef_vec_type := (12, 37, 68, 201); -- To be fed as mult input value
+    constant test_coef_vec  : test_coef_vec_type := (61, 79, 110, -40); -- To store in reconfig LUTs
+    constant test_mult_vec  : test_coef_vec_type := (12, 37, 98, -101); -- To be fed as mult input value
 
     component Reconfig_MAC_top is
         generic(LENGTH : integer:= 8;
@@ -130,7 +130,7 @@ begin
                     LUT_contents <= LUT_content_calc(test_coef_vec(test_counter));
                 end if;
 
-                if counter < 160 then
+                if counter <= 160 then
                     CDI <= LUT_contents(counter);
                     wr_conf <= '1';
                 else
