@@ -102,36 +102,36 @@ begin
                 "01" when m_buf(7 downto 5)="001" or  m_buf(7 downto 5)="110" else
                 "00";
                  
---    mantissa <= m_buf(6 downto 2) when exponent = "10" else
---                m_buf(5 downto 1) when exponent = "01" else
---                m_buf(4 downto 0);
---    mantissa <= mantissa_t when m_buf(7) = '0' else not mantissa_t;
+    mantissa_t <= m_buf(6 downto 2) when exponent = "10" else
+                m_buf(5 downto 1) when exponent = "01" else
+                m_buf(4 downto 0);
+    mantissa <= mantissa_t when m_buf(7) = '0' else (not mantissa_t + 1);
 
-    mantissa(0) <=      m_buf(2) when exponent = "10" and m_buf(7)='0' else
-                    not m_buf(2) when exponent = "10" and m_buf(7)='1' else
-                        m_buf(1) when exponent = "01" and m_buf(7)='0' else
-                    not m_buf(1) when exponent = "01" and m_buf(7)='1' else
-                        m_buf(0) when exponent = "00" and m_buf(7)='0' else
-                    not m_buf(0);
+--    mantissa(0) <=      m_buf(2) when exponent = "10" and m_buf(7)='0' else
+--                    not m_buf(2) when exponent = "10" and m_buf(7)='1' else
+--                        m_buf(1) when exponent = "01" and m_buf(7)='0' else
+--                    not m_buf(1) when exponent = "01" and m_buf(7)='1' else
+--                        m_buf(0) when exponent = "00" and m_buf(7)='0' else
+--                    not m_buf(0);
 
-    mantissa(1) <=      m_buf(3) when exponent = "10" and m_buf(7)='0' else
-                    not m_buf(3) when exponent = "10" and m_buf(7)='1' else
-                        m_buf(2) when exponent = "01" and m_buf(7)='0' else
-                    not m_buf(2) when exponent = "01" and m_buf(7)='1' else
-                        m_buf(1) when exponent = "00" and m_buf(7)='0' else
-                    not m_buf(1);
+--    mantissa(1) <=      m_buf(3) when exponent = "10" and m_buf(7)='0' else
+--                    not m_buf(3) when exponent = "10" and m_buf(7)='1' else
+--                        m_buf(2) when exponent = "01" and m_buf(7)='0' else
+--                    not m_buf(2) when exponent = "01" and m_buf(7)='1' else
+--                        m_buf(1) when exponent = "00" and m_buf(7)='0' else
+--                    not m_buf(1);
 
-    mantissa(2) <=  m_buf(4) xor m_buf(7) when exponent = "10" else
-                    m_buf(3) xor m_buf(7) when exponent = "01" else
-                    m_buf(2) xor m_buf(7);
+--    mantissa(2) <=  m_buf(4) xor m_buf(7) when exponent = "10" else
+--                    m_buf(3) xor m_buf(7) when exponent = "01" else
+--                    m_buf(2) xor m_buf(7);
 
-    mantissa(3) <=  m_buf(5) xor m_buf(7) when exponent = "10" else
-                    m_buf(4) xor m_buf(7) when exponent = "01" else
-                    m_buf(3) xor m_buf(7);
+--    mantissa(3) <=  m_buf(5) xor m_buf(7) when exponent = "10" else
+--                    m_buf(4) xor m_buf(7) when exponent = "01" else
+--                    m_buf(3) xor m_buf(7);
 
-    mantissa(4) <=  m_buf(6) xor m_buf(7) when exponent = "10" else
-                    m_buf(5) xor m_buf(7) when exponent = "01" else
-                    m_buf(4) xor m_buf(7);
+--    mantissa(4) <=  m_buf(6) xor m_buf(7) when exponent = "10" else
+--                    m_buf(5) xor m_buf(7) when exponent = "01" else
+--                    m_buf(4) xor m_buf(7);
 
 --    LUT6_inst0 : LUT6
 --        generic map (
