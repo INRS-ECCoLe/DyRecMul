@@ -9,9 +9,9 @@
 --   | |____    \   \________     | |_____   | |____
 --   |______|    \ _________      |_______|  |______|
 --
---  ECCoLe: Edge Computing, Communication and Learning Lab - INRS University
+--  ECCoLe: Edge Computing, Communication and Learning Lab 
 --
---  Author: Shervin Vakili
+--  Author: Shervin Vakili, INRS University
 --  Project: Reconfigurable MAC 
 --  Creation Date: 2023-04-31
 --  Description: Testbench for reconfigurable MAC

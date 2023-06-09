@@ -1,3 +1,23 @@
+#---------------------------------------------------------------------------
+#                ___________
+#    ______     /   ____    ____      _          ______
+#   |  ____|   /   /    INRS    \    | |        |  ____|
+#   | |       /   /     Edge     \   | |        | |
+#   | |____  /   /    Computing   \  | |        | |____
+#   |  ____| \   \  Communication /  | |        |  ____|   
+#   | |       \   \   Learning   /   | |        | |
+#   | |____    \   \_____LAB____/    | |_____   | |____
+#   |______|    \ ___________        |_______|  |______|
+#
+#  Edge Computing, Communication and Learning Lab
+#
+#  Author: Shervin Vakili, INRS University
+#
+#  Project: Reconfigurable MAC
+#  
+#  Creation Date: 2023-06-08
+#---------------------------------------------------------------------------
+
 import numpy as np
 
 def Approx_Multiply(multOp1, multOp2):
