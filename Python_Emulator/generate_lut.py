@@ -22,6 +22,12 @@
 #---------------------------------------------------------------------------
 
 #Generate LUT and save them as .h and .csv
+import numpy as np
+from Emulated_Approx_Functions import Approx_Multiply
+from Reconfig_MAC import quantize
+from save_lut_c import save_lut_c
+from save_lut_csv import save_lut_csv
+
 def Generate_LUT(bitwidth_Op1, bitwidth_Op2):
 
   NPV1 = pow(2, bitwidth_Op1)        #Number of possible values for Op1
