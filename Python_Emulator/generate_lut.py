@@ -26,7 +26,7 @@ import numpy as np
 from Emulated_Approx_Functions import Approx_Multiply
 from Reconfig_MAC import quantize
 from save_lut_c import Save_LUT_C
-from save_lut_csv import save_lut_csv
+from save_lut_csv import Save_LUT_CSV
 
 def Generate_LUT(bitwidth_Op1, bitwidth_Op2):
 
