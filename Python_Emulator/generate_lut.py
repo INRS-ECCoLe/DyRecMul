@@ -1,4 +1,25 @@
-
+#---------------------------------------------------------------------------
+#                ___________
+#    ______     /   ____    ____      _          ______
+#   |  ____|   /   /    INRS    \    | |        |  ____|
+#   | |       /   /     Edge     \   | |        | |
+#   | |____  /   /    Computing   \  | |        | |____
+#   |  ____| \   \  Communication /  | |        |  ____|   
+#   | |       \   \   Learning   /   | |        | |
+#   | |____    \   \_____LAB____/    | |_____   | |____
+#   |______|    \ ___________        |_______|  |______|
+#
+#  Edge Computing, Communication and Learning Lab - INRS University
+#
+#  Author: Amirhossein Zarei
+#
+#  Project: Reconfigurable MAC
+#  
+#  Creation Date: 2023-06-14
+#
+#  Description: reconfig_mac emulates approximate MAC calculation in our 
+#               new FPGA-based reconfigurable MAC architecture. 
+#---------------------------------------------------------------------------
 
 #Generate LUT and save them as .h and .csv
 def Generate_LUT(bitwidth_Op1, bitwidth_Op2):
