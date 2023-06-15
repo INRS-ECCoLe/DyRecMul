@@ -26,13 +26,22 @@ def Approx_Multiply(multOp1, multOp2):
     The result is then converted back to fixed point.
     '''
     multOp1Abs = np.abs(multOp1)
-    if multOp1 < 0:
-      multOp1Abs = multOp1Abs - 1
+    #if multOp1 < 0:
+    #  multOp1Abs = multOp1Abs - 1
     # Encoding to floating point
-    exponent = np.floor(np.log2(multOp1Abs)) - 4
-    if exponent < 0:
+    if multOp1Abs == 0:
         exponent = 0
-    mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
+    else:
+        exponent = np.floor(np.log2(multOp1Abs)) - 4
+        if exponent < 0:
+            exponent = 0
+    if multOp1 == -128: # Corner case
+        mantissa = 0
+    elif multOp1 < 0: 
+        mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
+    else:
+        mantissa = np.floor(multOp1Abs / pow(2,exponent))
+        
     #print(exponent, mantissa)
     # Multiplying the Mantissa
     resMantissa = round (mantissa * np.abs(multOp2) / 128)
@@ -43,5 +52,23 @@ def Approx_Multiply(multOp1, multOp2):
         result = -result
 
     #print(f'\nOperand1: {multOp1}   exponent: {exponent},   mantissa: {mantissa},    resMantissa = {resMantissa}    Operand2: {multOp2},    result: {result}\n')
+
+    return result 
+
+def Quantized_Multiply(multOp1, multOp2, qBits):
+    '''
+    Emulating simply quantized operands.
+    '''
+    if multOp1 < 0:
+        multOp1Q = np.ceil(multOp1/pow(2,qBits))
+    else:
+        multOp1Q = np.floor(multOp1/pow(2,qBits))
+
+    if multOp2 < 0:
+        multOp2Q = np.ceil(multOp2/pow(2,qBits))
+    else:
+        multOp2Q = np.floor(multOp2/pow(2,qBits))
+    
+    result = multOp2Q * multOp1Q
 
     return result 

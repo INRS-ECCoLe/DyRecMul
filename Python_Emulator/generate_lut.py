@@ -24,7 +24,6 @@
 #Generate LUT and save them as .h and .csv
 import numpy as np
 from Emulated_Approx_Functions import Approx_Multiply
-from Reconfig_MAC import quantize
 from save_lut_c import Save_LUT_C
 from save_lut_csv import Save_LUT_CSV
 
@@ -41,6 +40,7 @@ def Generate_LUT(bitwidth_Op1, bitwidth_Op2):
 
   Save_LUT_CSV(LUT)
   Save_LUT_C()
+  #Save_LUT_C_QUANTIZE()
   return LUT
 
 Generate_LUT(8, 8)

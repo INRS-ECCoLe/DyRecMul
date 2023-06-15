@@ -43,11 +43,11 @@ def quantize(inOp, rangeMax, bitWidth):
 
     return quantizedResult
 
-    print('--', shiftSize, quantizedResult, np.floor(np.log2(np.abs(rangeMax))))
+    #print('--', shiftSize, quantizedResult, np.floor(np.log2(np.abs(rangeMax))))
 
 
 multOp1 = 126
-multOp2 = -128
+multOp2 = 126
 rangeMax = 127
 multOp1Q = quantize(multOp1, rangeMax, 8)
 multOp2Q = quantize(multOp2, rangeMax, 8)
