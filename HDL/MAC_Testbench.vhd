@@ -54,8 +54,8 @@ architecture Behavioral of MAC_Testbench is
     signal test_counter     : integer;
     signal bit_cnt          : integer;
     type test_coef_vec_type is array (1 to TEST_LENGTH) of integer;
-    constant test_coef_vec  : test_coef_vec_type := (61, 79, 110, -40); -- To store in reconfig LUTs
-    constant test_mult_vec  : test_coef_vec_type := (12, 37, 98, -101); -- To be fed as mult input value
+    constant test_coef_vec  : test_coef_vec_type := (61, 79, 126, -128); -- To store in reconfig LUTs
+    constant test_mult_vec  : test_coef_vec_type := (12, 37, -128, 126); -- To be fed as mult input value
 
     component Reconfig_MAC_top is
         generic(LENGTH : integer:= 8;
@@ -90,10 +90,10 @@ architecture Behavioral of MAC_Testbench is
         coef_std_logic := conv_std_logic_vector(abs_coef, 8);
         for i in 0 to 31 loop   
             temp := coef_std_logic * conv_std_logic_vector(i, 5);
-            if temp(7) = '1' then -- rounding
-                temp_result := temp(12 downto 8) + 1;
+            if temp(6) = '1' then -- rounding
+                temp_result := temp(11 downto 7) + 1;
             else
-                temp_result := temp(12 downto 8);
+                temp_result := temp(11 downto 7);
             end if;
             for j in 0 to 4 loop
                 LUT_contents(5*32 - j*32 - i - 1) := temp_result(j);
@@ -153,7 +153,7 @@ begin
     end process;
 
     ping_pong_sel <= '0';
-    add_op <= conv_std_logic_vector(25,8);
+    add_op <= conv_std_logic_vector(0,8);
 
     MAC_INST: Reconfig_MAC_top 
     generic map(    LENGTH => 8,

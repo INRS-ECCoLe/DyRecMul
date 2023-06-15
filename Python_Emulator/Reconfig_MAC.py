@@ -28,27 +28,27 @@ from Emulated_Approx_Functions import Approx_Multiply
 
 def quantize(inOp, rangeMax, bitWidth):
     absBitWidth = bitWidth - 1 # bitwidth without sign
-    if np.abs(inOp) > np.abs(rangeMax):
+    absRangeMax = np.abs(rangeMax)
+    if np.abs(inOp) > absRangeMax + 1:
         print('ERROR: inOp cannot be larger than rangeMax!')
         return -1
     if rangeMax == 0:
         print('ERROR: rangeMax cannot be zero!')
         return -1
     elif rangeMax < pow(2,absBitWidth):
-        shiftSize = absBitWidth - np.floor(np.log2(np.abs(rangeMax)) + 1)
+        shiftSize = absBitWidth - np.floor(np.log2(absRangeMax) + 1)
         quantizedResult = round(inOp * pow(2,shiftSize))  # Scaling and rounding
     else:
-        shiftSize = np.floor(np.log2(np.abs(rangeMax)) + 1) - absBitWidth
+        shiftSize = np.floor(np.log2(absRangeMax) + 1) - absBitWidth
         quantizedResult = round(inOp / pow(2,shiftSize))
         
     return quantizedResult
 
     print('--', shiftSize, quantizedResult, np.floor(np.log2(np.abs(rangeMax))))
 
-    
 
-multOp1 = 12
-multOp2 = -40
+multOp1 = -128
+multOp2 = -128
 rangeMax = 127
 multOp1Q = quantize(multOp1, rangeMax, 8)
 multOp2Q = quantize(multOp2, rangeMax, 8)

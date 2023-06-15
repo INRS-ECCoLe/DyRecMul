@@ -105,7 +105,7 @@ begin
     mantissa_t <= m_buf(6 downto 2) when exponent = "10" else
                 m_buf(5 downto 1) when exponent = "01" else
                 m_buf(4 downto 0);
-    mantissa <= mantissa_t when m_buf(7) = '0' else (not mantissa_t + 1);
+    mantissa <= mantissa_t when m_buf(7) = '0' else (not mantissa_t);
 
     
     -- Reconfigurable Multiplier
