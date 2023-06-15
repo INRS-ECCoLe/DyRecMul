@@ -26,22 +26,22 @@ def Approx_Multiply(multOp1, multOp2):
     The result is then converted back to fixed point.
     '''
     multOp1Abs = np.abs(multOp1)
+    if multOp1 < 0:
+      multOp1Abs = multOp1Abs - 1
     # Encoding to floating point
     exponent = np.floor(np.log2(multOp1Abs)) - 4
-    if exponent < 0: 
+    if exponent < 0:
         exponent = 0
-    if multOp1 >= 0:
-        mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
-    else:
-        mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
+    mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
+    #print(exponent, mantissa)
     # Multiplying the Mantissa
     resMantissa = round (mantissa * np.abs(multOp2) / 128)
     # Decoder: back to fixed point
-    result = resMantissa * pow(2, exponent)  
+    result = resMantissa * pow(2, exponent)
     # Fixing sign of the result
     if multOp1 * multOp2 < 0:
-        result = -result   
+        result = -result
 
-    print(f'\nOperand1: {multOp1}   exponent: {exponent},   mantissa: {mantissa},    resMantissa = {resMantissa}    Operand2: {multOp2},    result: {result}\n')
+    #print(f'\nOperand1: {multOp1}   exponent: {exponent},   mantissa: {mantissa},    resMantissa = {resMantissa}    Operand2: {multOp2},    result: {result}\n')
 
     return result 

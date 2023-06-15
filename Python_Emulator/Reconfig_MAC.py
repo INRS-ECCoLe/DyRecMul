@@ -25,7 +25,6 @@
 import numpy as np
 from Emulated_Approx_Functions import Approx_Multiply
 
-
 def quantize(inOp, rangeMax, bitWidth):
     absBitWidth = bitWidth - 1 # bitwidth without sign
     absRangeMax = np.abs(rangeMax)
@@ -41,13 +40,13 @@ def quantize(inOp, rangeMax, bitWidth):
     else:
         shiftSize = np.floor(np.log2(absRangeMax) + 1) - absBitWidth
         quantizedResult = round(inOp / pow(2,shiftSize))
-        
+
     return quantizedResult
 
     print('--', shiftSize, quantizedResult, np.floor(np.log2(np.abs(rangeMax))))
 
 
-multOp1 = -128
+multOp1 = 126
 multOp2 = -128
 rangeMax = 127
 multOp1Q = quantize(multOp1, rangeMax, 8)
@@ -55,4 +54,4 @@ multOp2Q = quantize(multOp2, rangeMax, 8)
 print(f'--- rangeMax = {rangeMax}   Operand = {multOp1}  Quantized Operand  = {multOp1Q}')
 print(f'--- rangeMax = {rangeMax}   Operand = {multOp2}  Quantized Operand = {multOp2Q}')
 
-Approx_Multiply(multOp1Q, multOp2Q)
+print(f'mult result = {Approx_Multiply(multOp1Q, multOp2Q)}')

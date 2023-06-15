@@ -9,10 +9,14 @@
 #  Description: reconfig_mac emulates approximate MAC calculation in our
 #               new FPGA-based reconfigurable MAC architecture.
 #---------------------------------------------------------------------------
+
+import numpy as np
+from Emulated_Approx_Functions import Approx_Multiply
+
 #Make a .h file containg Approximate Multiplier LUT
 def Save_LUT_C():
   nbits=8
-  with open('LUT_C'+'.h', 'w') as myfile:
+  with open('Output_Files\LUT_C'+'.h', 'w') as myfile:
     bits = int(pow(2,nbits))
     lut_size_str = str(bits)
 
@@ -22,11 +26,11 @@ def Save_LUT_C():
     for i in range (0,bits//2):
       myfile.write('{')
       for j in range (0,bits//2):
-        x = Approx_Multiply(i,j)
+        x = int(Approx_Multiply(i,j) * 128)
         myfile.write('%s' % x)
         myfile.write(', ')
       for j in range (bits//2,bits):
-        x = Approx_Multiply(i,(bits-j)*-1)
+        x = int(Approx_Multiply(i,(bits-j)*-1) * 128)
         myfile.write('%s' % x)
         if j!=bits-1:
           myfile.write(', ')
@@ -36,11 +40,11 @@ def Save_LUT_C():
     for i in range (bits//2,bits):
         myfile.write('{')
         for j in range (0,bits//2):
-            x = Approx_Multiply((bits-i)*-1,j)
+            x = int(Approx_Multiply((bits-i)*-1,j) * 128)
             myfile.write('%s' % x)
             myfile.write(', ')
         for j in range (bits//2,bits):
-            x = Approx_Multiply((bits-i),(bits-j))
+            x = int(Approx_Multiply((bits-i)*-1,(bits-j)*-1) * 128)
             myfile.write('%s' % x)
             if j!=bits-1:
                 myfile.write(', ')

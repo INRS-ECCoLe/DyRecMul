@@ -23,5 +23,5 @@
 #Make a .csv file containg Approximate Multiplier LUT
 import numpy as np
 def Save_LUT_CSV(LUT):
-  np.savetxt('LUT.csv', LUT, delimiter=',')
+  np.savetxt('Output_Files\LUT.csv', LUT, delimiter=',')
   return

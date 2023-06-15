@@ -42,3 +42,5 @@ def Generate_LUT(bitwidth_Op1, bitwidth_Op2):
   Save_LUT_CSV(LUT)
   Save_LUT_C()
   return LUT
+
+Generate_LUT(8, 8)
