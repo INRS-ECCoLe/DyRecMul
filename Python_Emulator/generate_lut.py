@@ -23,24 +23,16 @@
 
 #Generate LUT and save them as .h and .csv
 import numpy as np
-from Emulated_Approx_Functions import Approx_Multiply
+
 from save_lut_c import Save_LUT_C
 from save_lut_csv import Save_LUT_CSV
+from save_lut_c_quantize import Save_LUT_C_QUANTIZE
 
-def Generate_LUT(bitwidth_Op1, bitwidth_Op2):
+def Generate_LUT():
 
-  NPV1 = pow(2, bitwidth_Op1)        #Number of possible values for Op1
-  NPV2 = pow(2, bitwidth_Op2)        #Number of possible values for Op2
-  LUT = np.zeros((NPV1, NPV2))
-
-  for i in range(NPV1):
-    for j in range(NPV2):
-      LUT[i, j] = Approx_Multiply(i- pow(2, bitwidth_Op1- 1), j- pow(2, bitwidth_Op2- 1))
-      #LUT[i, j] = Approx_Multiply(quantize(i- pow(2, bitwidth_Op1- 1), pow(2, bitwidth_Op1- 1)-1, bitwidth_Op1), quantize(j- pow(2, bitwidth_Op2- 1), pow(2, bitwidth_Op2- 1)-1, bitwidth_Op2))      #if you want to quantize Ops before Multiplying
-
-  Save_LUT_CSV(LUT)
+  Save_LUT_CSV()
   Save_LUT_C()
-  #Save_LUT_C_QUANTIZE()
-  return LUT
+  for ii in range(5,9):
+    Save_LUT_C_QUANTIZE(ii)
 
-Generate_LUT(8, 8)
+Generate_LUT()

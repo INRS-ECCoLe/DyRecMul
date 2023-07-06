@@ -22,6 +22,16 @@
 #---------------------------------------------------------------------------
 #Make a .csv file containg Approximate Multiplier LUT
 import numpy as np
-def Save_LUT_CSV(LUT):
+from Emulated_Approx_Functions import Approx_Multiply
+
+def Save_LUT_CSV():
+  nbits = 8
+  NPV = pow(2, nbits)        #Number of possible values for Op2
+  LUT = np.zeros((NPV, NPV))
+
+  for i in range(NPV):
+    for j in range(NPV):
+      LUT[i, j] = Approx_Multiply(i- pow(2, nbits- 1), j- pow(2, nbits- 1))
+
   np.savetxt('Output_Files\LUT.csv', LUT, delimiter=',')
   return

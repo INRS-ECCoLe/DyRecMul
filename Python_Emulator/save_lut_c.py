@@ -15,7 +15,7 @@ from Emulated_Approx_Functions import Approx_Multiply
 
 #Make a .h file containg Approximate Multiplier LUT
 def Save_LUT_C():
-  nbits=8
+  nbits = 8
   with open('Output_Files\LUT_C'+'.h', 'w') as myfile:
     bits = int(pow(2,nbits))
     lut_size_str = str(bits)

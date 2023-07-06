@@ -20,41 +20,12 @@
 
 import numpy as np
 
-def Approx_Multiply_v1(multOp1, multOp2):
+
+# ---------------------------------------
+def Approx_Multiply(multOp1, multOp2):
     '''
     The first operand (multOp1) is first converted to (2,5,1) float, Mantissa is multiplied by multOp2.
-    The result is then converted back to fixed point.
-    '''
-    multOp1Abs = np.abs(multOp1)
-    if multOp1 < 0:
-      multOp1Abs = multOp1Abs - 1
-    # Encoding to floating point
-    if multOp1Abs == 0:
-        exponent = 0
-    else:
-        exponent = np.floor(np.log2(multOp1Abs)) - 4
-        if exponent < 0:
-            exponent = 0
-
-    mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
-        
-    #print(exponent, mantissa)
-    # Multiplying the Mantissa
-    resMantissa = mantissa * np.abs(multOp2) / 128
-    # Decoder: back to fixed point
-    result = round(resMantissa * pow(2, exponent))
-    # Fixing sign of the result
-    if multOp1 * multOp2 < 0:
-        result = -result
-
-    #print(f'\nOperand1: {multOp1}   exponent: {exponent},   mantissa: {mantissa},    resMantissa = {resMantissa}    Operand2: {multOp2},    result: {result}\n')
-
-    return result 
-
-def Approx_Multiply_v2(multOp1, multOp2):
-    '''
-    The first operand (multOp1) is first converted to (2,5,1) float, Mantissa is multiplied by multOp2.
-    The result is then converted back to fixed point.
+    The result is then converted back to fixed point. This version handles -128 by saturation (converts it to -127)
     '''
     multOp1Abs = np.abs(multOp1)
 
@@ -65,11 +36,11 @@ def Approx_Multiply_v2(multOp1, multOp2):
         if exponent < 0:
             exponent = 0
     if multOp1 == -128: # Corner case
-        mantissa = 0
+        mantissa = 31
+        exponent = 2
     else: 
         mantissa = np.floor(multOp1Abs / pow(2,exponent))  # 5-bit mantissa
-        
-    #print(exponent, mantissa)
+    
     # Multiplying the Mantissa
     resMantissa = round (mantissa * np.abs(multOp2) / 128)
     # Decoder: back to fixed point
@@ -79,9 +50,9 @@ def Approx_Multiply_v2(multOp1, multOp2):
         result = -result
 
     #print(f'\nOperand1: {multOp1}   exponent: {exponent},   mantissa: {mantissa},    resMantissa = {resMantissa}    Operand2: {multOp2},    result: {result}\n')
-
     return result 
 
+# ----------------------------------------------
 def Quantized_Multiply(multOp1, multOp2, qBits):
     '''
     Emulating simply quantized operands.
