@@ -35,7 +35,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity Ordinary_Signed_MAC is
-    generic(LENGTH : integer:= 8;
+    generic(LENGTH : integer:= 5;
             INOUT_BUF_EN : boolean:= True);
     Port ( a : in signed(LENGTH-1 downto 0);  -- Mult input 1
            b : in signed(LENGTH-1 downto 0);    -- Mult input 2
@@ -71,7 +71,7 @@ begin
     end generate;
 
     INOUT_BUF_DISABLE: if INOUT_BUF_EN=False generate
-        result_o <= add_buf + temp;
+        result_o <= add_i + (a * b);
     end generate;
 
 
