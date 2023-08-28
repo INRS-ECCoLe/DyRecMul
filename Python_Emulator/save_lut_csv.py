@@ -22,7 +22,7 @@
 #---------------------------------------------------------------------------
 #Make a .csv file containg Approximate Multiplier LUT
 import numpy as np
-from Emulated_Approx_Functions import Approx_Multiply
+from Emulated_Approx_Functions import Approx_Multiply_Signed
 
 def Save_LUT_CSV():
   nbits = 8
@@ -31,7 +31,7 @@ def Save_LUT_CSV():
 
   for i in range(NPV):
     for j in range(NPV):
-      LUT[i, j] = Approx_Multiply(i- pow(2, nbits- 1), j- pow(2, nbits- 1))
+      LUT[i, j] = Approx_Multiply_Signed(i- pow(2, nbits- 1), j- pow(2, nbits- 1))
 
-  np.savetxt('Output_Files\LUT.csv', LUT, delimiter=',')
+  np.savetxt('Output_Files\LUT_RECONF_SIGNED.csv', LUT, delimiter=',')
   return

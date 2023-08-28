@@ -46,8 +46,8 @@ def extract_array_elements(header_file_path, bitWidth: int):
     elements = re.findall(r"-?\d+", content[start_index:])
     
     
-    lut_data = np.array(elements, dtype = np.int16)
-    
+    lut_data = np.array(elements, dtype = np.int64)
+        
     
     lut_data = lut_data.reshape((2**bitWidth, 2**bitWidth))
 
@@ -59,15 +59,21 @@ Calculate statistical tests.
 
 '''
 
-def stat_tests (ExactMul, ApproxMul, bitWidth):
+def stat_tests (ExactMul, ApproxMul, bitWidth: int, signed: bool):
     
     ExactMul = ExactMul.flatten()
     ApproxMul = ApproxMul.flatten()
     
-    # Common coefficient for calculations
-    coeff = ((1) / (2 ** (2 * (bitWidth - 1))))
-
-
+    
+    if (signed == True):
+        
+        coeff = ((1) / (2 ** (2 * (bitWidth - 1))))
+        
+    else:
+        
+        coeff = ((1) / (2 ** (2 * (bitWidth))))
+        
+    
     # Error Distance
     ED = ExactMul - ApproxMul
 
@@ -81,11 +87,12 @@ def stat_tests (ExactMul, ApproxMul, bitWidth):
     MRED = coeff * sum(ed / exactmul for ed, exactmul in zip(ED, ExactMul) if exactmul != 0)
 
     # Mean Squared Error
-    MSE = coeff * np.sum(ED ** 2)
+    MSE = coeff * np.sum(np.power(ED, 2))
     
     # Normalised Error Distance
     NED = coeff * np.sum(np.divide(ED, max(ED)))
     
+   
     
     return (EP, MAE, MRED, MSE, NED)
 
@@ -96,8 +103,8 @@ Write the results to a csv file.
 
 '''
 
-def write_stat_values_to_csv(ExactMul, ApproxMul, bitWidth, approx_name, file_path):
-    results = stat_tests(ExactMul, ApproxMul, bitWidth)
+def write_stat_values_to_csv(ExactMul, ApproxMul, bitWidth: int, signed: bool, approx_name, file_path):
+    results = stat_tests(ExactMul, ApproxMul, bitWidth, signed)
     
 
     with open(file_path, 'a', newline='') as csvfile:

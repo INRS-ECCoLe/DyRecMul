@@ -14,7 +14,7 @@
 --  Author: Shervin Vakili, INRS University
 --  Project: Reconfig MAC 
 --  Creation Date: 2023-05-10
---  Description: Multiply and accumulate top module
+--  Description: Reconfigurable signed multiply top module
 ------------------------------------------------------------------------------------------------
 
 library IEEE;
@@ -24,7 +24,7 @@ use ieee.std_logic_unsigned.all;
 use ieee.std_logic_textio.all;
 use ieee.std_logic_arith.all; 
 Library UNISIM;
---use UNISIM.vcomponents.all;
+#use UNISIM.vcomponents.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -35,12 +35,11 @@ Library UNISIM;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Reconfig_MAC_top is
+entity Signed_Mult_top is
     generic(LENGTH : integer:= 8;
-            INOUT_BUF_EN : boolean:= True; -- Set to True for timing measurment, set to False for area utilization measurments
+            INOUT_BUF_EN : boolean:= False; -- Set to True for timing measurment, set to False for area utilization measurments
             PING_PONG_EN : boolean:= False);
-    Port ( m_i : in STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Mult input 1
-           a_i: in STD_LOGIC_VECTOR (LENGTH-1 downto 0);    -- Add input
+    Port ( m_i : in STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Mult input operand 1
            clk, rst : in STD_LOGIC;
            CDI_i : in STD_LOGIC;
            ping_pong_sel_i : in STD_LOGIC;
@@ -48,9 +47,10 @@ entity Reconfig_MAC_top is
           
            result_o : out STD_LOGIC_VECTOR (LENGTH-1 downto 0)
     );
-end Reconfig_MAC_top;
+end Signed_Mult_top;
 
-architecture Behavioral of Reconfig_MAC_top is
+architecture Behavioral of Signed_Mult_top is
+    constant ZERO_VEC: STD_LOGIC_VECTOR (LENGTH-1 downto 0):= (others => '0');
     signal mult_result : STD_LOGIC_VECTOR (4 downto 0);
     signal mult_result_s : STD_LOGIC_VECTOR (4 downto 0);
     signal mult_result_p : STD_LOGIC_VECTOR (4 downto 0);
@@ -62,7 +62,6 @@ architecture Behavioral of Reconfig_MAC_top is
     signal mantissa_t : STD_LOGIC_VECTOR (4 downto 0);
     signal exponent : STD_LOGIC_VECTOR (1 downto 0);
     signal m_buf : STD_LOGIC_VECTOR (LENGTH-1 downto 0);
-    signal a_buf : STD_LOGIC_VECTOR (LENGTH-1 downto 0);
     signal carry : STD_LOGIC;
     
     component reconfig_mult is
@@ -87,11 +86,10 @@ begin
                 c_sign  <= '0';
             else
                 m_buf <= m_i;
-                a_buf <= a_i;
                 if (m_buf(7) xor c_sign) = '0' then
-                    result_o <= a_buf + decoded_mult_res;
+                    result_o <= ZERO_VEC + decoded_mult_res;
                 else
-                    result_o <= a_buf - decoded_mult_res;
+                    result_o <= ZERO_VEC - decoded_mult_res;
                 end if;
                 if wr_conf_i = '1' then
                     c_sign <= CDI_i;
@@ -111,8 +109,7 @@ begin
          end if;
     end process;
     m_buf <= m_i;
-    a_buf <= a_i;
-    result_o <= a_buf + decoded_mult_res when (m_buf(7) xor c_sign) = '0' else a_buf - decoded_mult_res;   
+    result_o <= ('0'&decoded_mult_res) when (m_buf(7) xor c_sign) = '0' else ZERO_VEC - decoded_mult_res;   
     end generate;
     
     -- Encoder (Fixed-to-Float convert)

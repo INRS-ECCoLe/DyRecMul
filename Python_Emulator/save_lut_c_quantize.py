@@ -18,7 +18,7 @@ def Save_LUT_C_QUANTIZE(qBitwidth):
   # qBitwidth is the number of bits after quantization
   nbits=8
   qbits=nbits-qBitwidth  #number of bits that have to be truncated
-  with open('Output_Files\LUT_C_Q'+str(qBitwidth)+'.h', 'w') as myfile:
+  with open('Output_Files\LUT_EXACT_Q'+str(qBitwidth)+'.h', 'w') as myfile:
     bits = int(pow(2,nbits))
     lut_size_str = str(bits)
     myfile.write('#include <stdint.h>\n\n')
@@ -54,4 +54,21 @@ def Save_LUT_C_QUANTIZE(qBitwidth):
             myfile.write('},')
             myfile.write('\n')
     myfile.write('}};\n')
+
+  with open('Output_Files\LUT_EXACT_UNSIGNED_Q'+str(qBitwidth)+'.h', 'w') as myfile_u:
+    lut_size_str = str(bits)
+    myfile_u.write('#include <stdint.h>\n\n')
+    myfile_u.write('const int' + str(2*nbits) + '_t lut [' + lut_size_str + '][' + lut_size_str +'] = {')
+
+    for i in range (0,bits):
+      myfile_u.write('{')
+      for j in range (0,bits):
+        x = int(Quantized_Multiply(i,j,qbits) *  pow(pow(2,qbits),2))
+        myfile_u.write('%s' % x)
+        if j!=bits-1:
+          myfile_u.write(', ')
+      if(i!=bits-1):
+        myfile_u.write('},')
+        myfile_u.write('\n')
+    myfile_u.write('}};\n')
   return
