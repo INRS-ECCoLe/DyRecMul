@@ -35,7 +35,7 @@ Library UNISIM;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Reconfig_MAC_top is
+entity DyRecMul_MAC is
     generic(LENGTH : integer:= 8;
             INOUT_BUF_EN : boolean:= True; -- Set to True for timing measurment, set to False for area utilization measurments
             PING_PONG_EN : boolean:= False);
@@ -48,9 +48,9 @@ entity Reconfig_MAC_top is
           
            result_o : out STD_LOGIC_VECTOR (LENGTH-1 downto 0)
     );
-end Reconfig_MAC_top;
+end DyRecMul_MAC;
 
-architecture Behavioral of Reconfig_MAC_top is
+architecture Behavioral of DyRecMul_MAC is
     signal mult_result : STD_LOGIC_VECTOR (4 downto 0);
     signal mult_result_s : STD_LOGIC_VECTOR (4 downto 0);
     signal mult_result_p : STD_LOGIC_VECTOR (4 downto 0);

@@ -2,12 +2,11 @@
 #
 #  Revised By: Amirhossein Zarei
 #
-#  Project: Reconfigurable MAC
+#  Project: DyRecMac
 #
 #  Creation Date: 2023-06-14
 #
-#  Description: reconfig_mac emulates approximate MAC calculation in our
-#               new FPGA-based reconfigurable MAC architecture.
+#  Description: generates lut.h file to be used for accuracy evaluation in AdaPT
 #---------------------------------------------------------------------------
 
 import numpy as np

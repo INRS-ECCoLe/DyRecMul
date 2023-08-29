@@ -74,5 +74,4 @@ begin
         result_o <= add_i + (a * b);
     end generate;
 
-
 end Behavioral;

@@ -17,7 +17,6 @@
 --  Description: Testbench for reconfigurable MAC
 ------------------------------------------------------------------------------------------------
 
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.std_logic_unsigned.all;
@@ -57,7 +56,7 @@ architecture Behavioral of MAC_Testbench is
     constant test_coef_vec  : test_coef_vec_type := (61, 79, 126, -128); -- To store in reconfig LUTs
     constant test_mult_vec  : test_coef_vec_type := (12, 37, -128, 126); -- To be fed as mult input value
 
-    component Reconfig_MAC_top is
+    component DyRecMul_MAC is
         generic(LENGTH : integer:= 8;
                 PING_PONG_EN : boolean:= True);
         Port ( m_i : in STD_LOGIC_VECTOR (LENGTH-1 downto 0);  -- Mult input 1
@@ -155,7 +154,7 @@ begin
     ping_pong_sel <= '0';
     add_op <= conv_std_logic_vector(0,8);
 
-    MAC_INST: Reconfig_MAC_top 
+    MAC_INST: DyRecMul_MAC 
     generic map(    LENGTH => 8,
                     PING_PONG_EN => True)
     Port map(   m_i             => mult_op, -- Mult input 1
@@ -168,6 +167,5 @@ begin
           
                 result_o        => result
     );
-
 
 end Behavioral;

@@ -20,7 +20,6 @@
 
 import numpy as np
 
-
 # ---------------------------------------
 def Approx_Multiply_Signed(multOp1, multOp2):
     '''

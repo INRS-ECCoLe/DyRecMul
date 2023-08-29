@@ -1,23 +1,21 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 05/24/2023 11:32:56 PM
--- Design Name: 
--- Module Name: reconfig_mult - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
+---------------------------------------------------------------------------------------------------
+--                __________
+--    ______     /   ________      _          ______
+--   |  ____|   /   /   ______    | |        |  ____|
+--   | |       /   /   /      \   | |        | |
+--   | |____  /   /   /        \  | |        | |____
+--   |  ____| \   \   \        /  | |        |  ____|   
+--   | |       \   \   \______/   | |        | |
+--   | |____    \   \________     | |_____   | |____
+--   |______|    \ _________      |_______|  |______|
+--
+--  Edge Computing, Communication and Learning Lab (ECCoLE) 
+--
+--  Author: Shervin Vakili, INRS University
+--  Project: DyRecMul 
+--  Creation Date: 2023-04-12
+--  Description: CFGLUT5-based multiplier for mantissa multiplication
+------------------------------------------------------------------------------------------------
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;

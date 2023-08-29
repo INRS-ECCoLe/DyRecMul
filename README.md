@@ -23,9 +23,10 @@ $ pip install numpy matplotlib
 This repository consists of three components: hardware description at the RT level, error analysis, and accuracy measurement for deep learning inference.
 
 ### Hardware Design
-```
-To be completed ...
-```
+DyRecMul_INT8.vhd:  INT8 version of DyRecMul
+DyRecMul_UINT8.vhd: UNIT8 version of DyRecMul
+DyRecMul_MAC.vhd: MAC version of DyRecMul
+MAC_Testbench.vhd: Testbench of the MAC version of DyRecMul
 
 ### Error Analysis
 ```
