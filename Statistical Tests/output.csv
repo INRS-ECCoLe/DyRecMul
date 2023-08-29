@@ -1,5 +1,5 @@
 
-ApproxMul:,LUT_C.h
+ApproxMul:,DyRecMul_Signed.h
 
 Error Probability,0.5157928466796875
 Mean Absolute Error,397.46875
@@ -15,7 +15,7 @@ Mean Relative Error Distance,0.12592104696618328
 Mean Squared Error,5515991.0
 Normalised Error Distance,0.011672430830039526
 
-ApproxMul:,LUT_RECONF_UNSIGNED.h
+ApproxMul:,DyRecMul_Unsigned.h
 
 Error Probability,0.738037109375
 Mean Absolute Error,336.96875
