@@ -23,12 +23,15 @@ $ pip install numpy matplotlib
 This repository consists of three components: hardware description at the RT level, error analysis, and accuracy measurement for deep learning inference.
 
 ### Hardware Design
-DyRecMul_INT8.vhd:  INT8 version of DyRecMul
-DyRecMul_UINT8.vhd: UNIT8 version of DyRecMul
-DyRecMul_MAC.vhd: MAC version of DyRecMul
+DyRecMul_INT8.vhd: INT8 version of DyRecMul  
+DyRecMul_UINT8.vhd: UNIT8 version of DyRecMul  
+DyRecMul_MAC.vhd: MAC version of DyRecMul  
 MAC_Testbench.vhd: Testbench of the MAC version of DyRecMul
 
 ### Error Analysis
-```
-To be completed ...
-```
+
+### Accuracy measurement for deep learning inference
+The accuracy of INT8 DyRecMul has been measured using AdaPT tool, available: https://github.com/dimdano/adapt/  
+Custom approximate multipliers must be provided as C header files which contain a lookup table of all output values that the approximate multiplier generates for each possible combination of inputs.  
+/Python_Emulator/generate_lut.py generates the lookup table files for INT8 DyRecMul as well as INT5 to INT8 exact multipliers in /Python_Emulator/Output_Files folder. 
+
