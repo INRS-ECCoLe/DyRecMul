@@ -30,6 +30,8 @@ MAC_Testbench.vhd: Testbench of the MAC version of DyRecMul
 
 ### Error Analysis
 
+The **INT8** and **UINT8** version of **DyRecMul** is evaluated through five error metrics, which are Error Probability (**EP**), Mean Absolute Error (**MAE**), Mean Relative Error (**MRE**), Mean Squared Error (**MSE**), and Normalized Error Distance (**NED**). All the required modules are available in /```Statistical_Tests/stat_test.py```, and an example of the evaluation of the designs is presented in ```/Statistical_Tests/Example.ipynb.```
+
 ### Accuracy measurement for deep learning inference
 The accuracy of INT8 DyRecMul has been measured using AdaPT tool, available: https://github.com/dimdano/adapt/  
 Custom approximate multipliers must be provided as C header files which contain a lookup table of all output values that the approximate multiplier generates for each possible combination of inputs.  
