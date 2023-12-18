@@ -24,7 +24,7 @@ use ieee.std_logic_unsigned.all;
 use ieee.std_logic_textio.all;
 use ieee.std_logic_arith.all; 
 Library UNISIM;
-#use UNISIM.vcomponents.all;
+use UNISIM.vcomponents.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
