@@ -1,0 +1,24 @@
+
+ApproxMul:,DyRecMul_Signed.h
+
+Error Probability,0.5157928466796875
+Mean Absolute Error,397.46875
+Mean Relative Error Distance,0.06809935155703237
+Mean Squared Error,96336.0
+Normalised Error Distance,4.8828124999999827e-05
+
+ApproxMul:,mul8s_1L2H.h
+
+Error Probability,0.748016357421875
+Mean Absolute Error,464.8359375
+Mean Relative Error Distance,0.12592104696618328
+Mean Squared Error,5515991.0
+Normalised Error Distance,0.011672430830039526
+
+ApproxMul:,DyRecMul_Unsigned.h
+
+Error Probability,0.738037109375
+Mean Absolute Error,336.96875
+Mean Relative Error Distance,0.019421936644001846
+Mean Squared Error,260528.0
+Normalised Error Distance,0.12105305989583333
