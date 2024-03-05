@@ -69,6 +69,8 @@ begin
     end generate;
 
     INOUT_BUF_DISABLE: if INOUT_BUF_EN=False generate
+        a_buf <= a;
+        b_buf <= b;
         result_o <= temp;
     end generate;
 
